@@ -4,6 +4,7 @@ import com.academy.springboot.exception.RecordNotFoundException;
 import com.academy.springboot.model.Voucher;
 import com.academy.springboot.repository.VoucherRepository;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,8 +37,9 @@ public class VoucherServiceImpl implements VoucherService{
     @Override
     public Voucher updateVoucher(Voucher voucher, Long id) throws RecordNotFoundException {
         Voucher voucherFound = voucherRepository.findById(id).orElseThrow(RecordNotFoundException::new);
-        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.getConfiguration().setSkipNullEnabled(false);
         modelMapper.map(voucher, voucherFound);
+        voucherFound.setId(id);
         return voucherFound;
     }
 
