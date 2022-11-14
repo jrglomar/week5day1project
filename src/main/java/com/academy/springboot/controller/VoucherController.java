@@ -26,7 +26,7 @@ public class VoucherController {
     }
 
     @GetMapping("/{id}")
-    public Voucher findById(@PathVariable Integer id) throws RecordNotFoundException {
+    public Voucher findById(@PathVariable Long id) throws RecordNotFoundException {
         return voucherService.findVoucherById(id);
     }
 
@@ -36,12 +36,12 @@ public class VoucherController {
     }
 
     @PutMapping("/{id}")
-    public Voucher update(@RequestBody Voucher voucher, @PathVariable Integer id) throws RecordNotFoundException {
+    public Voucher update(@RequestBody Voucher voucher, @PathVariable Long id) throws RecordNotFoundException {
         return voucherService.updateVoucher(voucher, id);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Integer id) throws RecordNotFoundException {
+    public ResponseEntity<String> delete(@PathVariable Long id) throws RecordNotFoundException {
         voucherService.deleteVoucher(id);
         return new ResponseEntity<>("Voucher deleted successfully!", HttpStatus.OK);
     }

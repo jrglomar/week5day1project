@@ -9,12 +9,12 @@ public interface VoucherService {
 
     Page<Voucher> findAllVoucher(Pageable pageable);
 
-    Voucher findVoucherById(Integer id) throws RecordNotFoundException;
+    Voucher findVoucherById(Long id) throws RecordNotFoundException;
 
     Voucher saveVoucher(Voucher voucher);
 
-    Voucher updateVoucher(Voucher voucher, Integer id) throws RecordNotFoundException;
+    Voucher updateVoucher(Voucher voucher, Long id) throws RecordNotFoundException;
 
-    void deleteVoucher(Integer id) throws RecordNotFoundException;
+    void deleteVoucher(Long id) throws RecordNotFoundException;
 
 }

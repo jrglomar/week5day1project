@@ -5,6 +5,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface VoucherRepository extends PagingAndSortingRepository<Voucher, Integer>{
+public interface VoucherRepository extends PagingAndSortingRepository<Voucher, Long>{
 
 }
