@@ -26,7 +26,7 @@ public class VoucherServiceImpl implements VoucherService{
 
     @Override
     public Voucher findVoucherById(Long id) throws RecordNotFoundException {
-        return voucherRepository.findById(id).orElseThrow(() -> new RecordNotFoundException());
+        return voucherRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Voucher not found."));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class VoucherServiceImpl implements VoucherService{
 
     @Override
     public Voucher updateVoucher(Voucher voucher, Long id) throws RecordNotFoundException {
-        Voucher voucherFound = voucherRepository.findById(id).orElseThrow(() -> new RecordNotFoundException());
+        Voucher voucherFound = voucherRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Voucher to update not found."));
         modelMapper.getConfiguration().setSkipNullEnabled(false);
         modelMapper.map(voucher, voucherFound);
         voucherFound.setId(id);
@@ -45,6 +45,6 @@ public class VoucherServiceImpl implements VoucherService{
 
     @Override
     public void deleteVoucher(Long id) throws RecordNotFoundException {
-        voucherRepository.delete(voucherRepository.findById(id).orElseThrow(() -> new RecordNotFoundException()));
+        voucherRepository.delete(voucherRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Voucher to delete not found.")));
     }
 }
