@@ -12,11 +12,17 @@ public class Voucher {
     private Integer Number;
 
     private Double amount;
-
     private String type;
-    @Column(name="TEXT")
+    @Column(name="description")
     private String description;
-
+    public Voucher(){}
+    public Voucher(Long id, Integer number, Double amount, String type, String description) {
+        this.id = id;
+        Number = number;
+        this.amount = amount;
+        this.type = type;
+        this.description = description;
+    }
     public String getDescription() {
         return description;
     }
@@ -24,8 +30,6 @@ public class Voucher {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
 
     public Long getId() {
         return id;

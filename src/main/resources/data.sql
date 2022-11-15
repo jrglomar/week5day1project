@@ -1,0 +1,1 @@
+INSERT INTO voucher(id, number,amount,description) VALUES(1,24,134,'first voucher');
