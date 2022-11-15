@@ -40,7 +40,7 @@ class VoucherServiceImplTest {
         Voucher voucher1 = new Voucher(1L, 123, 35, "This is voucher number 1", Types.CASH);
         Voucher voucher2 = new Voucher(2L, 456, 35, "This is voucher number 2", Types.CHECK);
         Voucher voucher3 = new Voucher(3L, 789, 45.5, "This is voucher number 3", Types.CASH);
-        Pageable pageable = PageRequest.of(0,3);
+        Pageable pageable = PageRequest.of(0,10);
         Page<Voucher> expectedListOfVoucher = new PageImpl<>(List.of(voucher1, voucher2, voucher3));
 
         Mockito.when(voucherRepository.findAll(Mockito.any(Pageable.class))).thenReturn(expectedListOfVoucher);
