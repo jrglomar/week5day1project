@@ -2,7 +2,6 @@ package com.academy.springboot.model;
 
 import com.academy.springboot.enums.Types;
 import lombok.*;
-import org.w3c.dom.Text;
 
 import javax.persistence.*;
 
