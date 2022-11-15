@@ -3,6 +3,7 @@ package com.academy.springboot.controller;
 import com.academy.springboot.exception.RecordNotFoundException;
 import com.academy.springboot.model.Voucher;
 import com.academy.springboot.service.VoucherService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,18 +27,18 @@ public class VoucherController {
     }
 
     @GetMapping("/{id}")
-    public Voucher findById(@PathVariable Long id) throws RecordNotFoundException {
-        return voucherService.findVoucherById(id);
+    public ResponseEntity<Voucher> findById(@PathVariable Long id) throws RecordNotFoundException {
+        return new ResponseEntity<>(voucherService.findVoucherById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public Voucher save(@RequestBody Voucher voucher) {
-        return voucherService.saveVoucher(voucher);
+    public ResponseEntity<Voucher> save(@RequestBody Voucher voucher) {
+        return new ResponseEntity<>(voucherService.saveVoucher(voucher), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public Voucher update(@RequestBody Voucher voucher, @PathVariable Long id) throws RecordNotFoundException {
-        return voucherService.updateVoucher(voucher, id);
+    public ResponseEntity<Voucher> update(@RequestBody Voucher voucher, @PathVariable Long id) throws RecordNotFoundException {
+        return new ResponseEntity<>(voucherService.updateVoucher(voucher, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

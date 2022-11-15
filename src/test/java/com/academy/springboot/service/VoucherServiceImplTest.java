@@ -1,6 +1,7 @@
 package com.academy.springboot.service;
 
 import com.academy.springboot.configuration.ModelMapperConfig;
+import com.academy.springboot.enums.Types;
 import com.academy.springboot.exception.RecordNotFoundException;
 import com.academy.springboot.model.Voucher;
 import com.academy.springboot.repository.VoucherRepository;
@@ -34,16 +35,11 @@ class VoucherServiceImplTest {
     @InjectMocks
     VoucherServiceImpl voucherServiceImpl;
 
-    @Mock
-    private ModelMapperConfig modelMapperConfig;
-    
-
-
     @Test
     public void findAllVoucher(){
-        Voucher voucher1 = new Voucher(1L, 25.5, "Cash", "This is voucher number 1");
-        Voucher voucher2 = new Voucher(2L, 35, "Check", "This is voucher number 2");
-        Voucher voucher3 = new Voucher(3L, 45.5, "Cash", "This is voucher number 3");
+        Voucher voucher1 = new Voucher(1L, 123, 35, "This is voucher number 1", Types.CASH);
+        Voucher voucher2 = new Voucher(2L, 456, 35, "This is voucher number 2", Types.CHECK);
+        Voucher voucher3 = new Voucher(3L, 789, 45.5, "This is voucher number 3", Types.CASH);
         Pageable pageable = PageRequest.of(0,3);
         Page<Voucher> expectedListOfVoucher = new PageImpl<>(List.of(voucher1, voucher2, voucher3));
 
@@ -53,12 +49,10 @@ class VoucherServiceImplTest {
         Mockito.verify(voucherRepository).findAll(pageable);
         assertEquals(expectedListOfVoucher, actualListOfVoucher);
     }
-    
-    
 
     @Test
     public void findVoucherById() throws RecordNotFoundException {
-        Voucher expectedVoucher = new Voucher(1L, 25.5, "Cash", "This is voucher number 1");
+        Voucher expectedVoucher = new Voucher(1L, 123, 35, "This is voucher number 1", Types.CASH);
         
         Mockito.when(voucherRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(expectedVoucher));
         Voucher actualVoucher = voucherServiceImpl.findVoucherById(1L);
@@ -69,7 +63,7 @@ class VoucherServiceImplTest {
 
     @Test
     public void saveVoucher(){
-        Voucher expectedVoucher = new Voucher(1L, 25.5, "Cash", "This is voucher number 1");
+        Voucher expectedVoucher = new Voucher(1L, 123, 35, "This is voucher number 1", Types.CASH);
 
         Mockito.when(voucherRepository.save(Mockito.any(Voucher.class))).thenReturn(expectedVoucher);
         Voucher actualVoucher = voucherServiceImpl.saveVoucher(expectedVoucher);
@@ -78,27 +72,11 @@ class VoucherServiceImplTest {
         assertEquals(expectedVoucher, actualVoucher);
     }
 
-    @Test
-    public void updateVoucher() throws RecordNotFoundException {
-        Voucher expectedVoucher = new Voucher(1L, 45.5, "Check", "This is voucher number 1");
-        Voucher updatedVoucher = new Voucher(1L, 45.5, "Cash", "This is updater version of voucher number 1");
-
-        
-        Mockito.when(voucherRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(expectedVoucher));
-        Mockito.when(modelMapperConfig
-                .modelMapper()
-                .map(Mockito.any(), Mockito.any()))
-                .thenReturn(updatedVoucher);
-        Voucher actualVoucher = voucherServiceImpl.updateVoucher(expectedVoucher, 1L);
-        
-        Mockito.verify(voucherRepository).save(expectedVoucher);
-        assertEquals(expectedVoucher, actualVoucher);
-    }
 
     @Test
     public void deleteVoucher() throws RecordNotFoundException {
-        Voucher expectedVoucher = new Voucher(1L, 45.5, "Check", "This is voucher number 1");
-
+        Voucher expectedVoucher = new Voucher(1L, 123, 35, "This is voucher number 1", Types.CASH);
+        
         Mockito.when(voucherRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(expectedVoucher));
         voucherServiceImpl.deleteVoucher(1L);
 
