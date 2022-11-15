@@ -17,6 +17,15 @@ public class Voucher {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    Voucher(){}
+
+    public Voucher(Long id, Number amount, String type, String description) {
+        this.id = id;
+        this.amount = amount;
+        this.type = type;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
