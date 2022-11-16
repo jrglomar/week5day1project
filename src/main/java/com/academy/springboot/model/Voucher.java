@@ -21,7 +21,7 @@ public class Voucher {
     @Column
     private Number amount;
     
-    @Column(columnDefinition = "TEXT")
+    @Column
     private String description;
 
     @Column
