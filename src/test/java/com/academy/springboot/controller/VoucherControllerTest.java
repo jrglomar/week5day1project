@@ -40,17 +40,10 @@ public class VoucherControllerTest {
 
     @BeforeEach
     void setup() {
-        aj = new Voucher();
-        aj.setNumber(232);
-        aj.setAmount(BigDecimal.valueOf(30000));
-        aj.setType(Types.CASH);
-        aj.setDescription("You have won 30000!!!");
-
-        raven = new Voucher();
-        raven.setNumber(232);
-        raven.setAmount(BigDecimal.valueOf(30000));
-        raven.setType(Types.CASH);
-        raven.setDescription("You have won 30000!!!");
+        aj = new Voucher(1L,232,BigDecimal.valueOf(30000)
+                ,"You have won 30000!!!",Types.CASH);
+        raven = new Voucher(2L,546456,BigDecimal.valueOf(50000)
+                ,"You have won 50000!!!",Types.CHECK);
     }
 
     @Test
