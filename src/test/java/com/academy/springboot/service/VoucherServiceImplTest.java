@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,10 +37,10 @@ class VoucherServiceImplTest {
     VoucherServiceImpl voucherServiceImpl;
 
     @Test
-    public void findAllVoucher(){
+    public void findnAllVoucher(){
         Voucher voucher1 = new Voucher(1L, 123, 35, "This is voucher number 1", Types.CASH);
-        Voucher voucher2 = new Voucher(2L, 456, 35, "This is voucher number 2", Types.CHECK);
-        Voucher voucher3 = new Voucher(3L, 789, 45.5, "This is voucher number 3", Types.CASH);
+        Voucher voucher2 = new Voucher(2L, 456, 35.5, "This is voucher number 2", Types.CHECK);
+        Voucher voucher3 = new Voucher(3L, 789, 45, "This is voucher number 3", Types.CASH);
         Pageable pageable = PageRequest.of(0,10);
         Page<Voucher> expectedListOfVoucher = new PageImpl<>(List.of(voucher1, voucher2, voucher3));
 
@@ -53,7 +54,7 @@ class VoucherServiceImplTest {
     @Test
     public void findVoucherById() throws RecordNotFoundException {
         Voucher expectedVoucher = new Voucher(1L, 123, 35, "This is voucher number 1", Types.CASH);
-        
+
         Mockito.when(voucherRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(expectedVoucher));
         Voucher actualVoucher = voucherServiceImpl.findVoucherById(1L);
         
@@ -76,7 +77,7 @@ class VoucherServiceImplTest {
     @Test
     public void deleteVoucher() throws RecordNotFoundException {
         Voucher expectedVoucher = new Voucher(1L, 123, 35, "This is voucher number 1", Types.CASH);
-        
+
         Mockito.when(voucherRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(expectedVoucher));
         voucherServiceImpl.deleteVoucher(1L);
 

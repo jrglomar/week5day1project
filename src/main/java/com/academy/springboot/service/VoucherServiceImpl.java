@@ -42,9 +42,12 @@ public class VoucherServiceImpl implements VoucherService{
         voucherFound.setId(id);
         return voucherFound;
     }
-
     @Override
     public void deleteVoucher(Long id) throws RecordNotFoundException {
         voucherRepository.delete(voucherRepository.findById(id).orElseThrow(RecordNotFoundException::new));
     }
 }
+
+//    public void delete(Long id) {
+//        return voucherRepository.findById(id).map(Voucher-> {
+//            voucherRepository.delete(Voucher);}}

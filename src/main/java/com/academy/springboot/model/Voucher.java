@@ -2,7 +2,6 @@ package com.academy.springboot.model;
 
 import com.academy.springboot.enums.Types;
 import lombok.*;
-import org.w3c.dom.Text;
 
 import javax.persistence.*;
 
@@ -22,7 +21,7 @@ public class Voucher {
     @Column
     private Number amount;
     
-    @Column(columnDefinition = "TEXT")
+    @Column
     private String description;
 
     @Column
