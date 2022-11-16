@@ -1,6 +1,7 @@
 package com.academy.springboot.service;
 
 
+import com.academy.springboot.enums.Roles;
 import com.academy.springboot.exception.RecordNotFoundException;
 import com.academy.springboot.model.User;
 import com.academy.springboot.repository.UserRepository;
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public Page<User> findAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
+
     @Override
     public User findUserById(Long id) throws RecordNotFoundException {
         Optional<User> userOptional = userRepository.findById(id);
@@ -45,10 +47,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new UsernameNotFoundException("Invalid user.");
         }
         return new org.springframework.security.core.userdetails.User
-                (user.getUserName(), user.getPassword(), getAuthority());
+                (user.getUserName(), user.getPassword(), getAuthority(user));
     }
 
-    private List<SimpleGrantedAuthority> getAuthority() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    private List<SimpleGrantedAuthority> getAuthority(User user) {
+        if (user.getRole().equals(Roles.ADMIN))
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+
     }
 }
