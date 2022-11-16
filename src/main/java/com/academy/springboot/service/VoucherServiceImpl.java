@@ -40,14 +40,10 @@ public class VoucherServiceImpl implements VoucherService{
         modelMapper.getConfiguration().setSkipNullEnabled(false);
         modelMapper.map(voucher, voucherFound);
         voucherFound.setId(id);
-        return voucherFound;
+        return voucherRepository.save(voucherFound);
     }
     @Override
     public void deleteVoucher(Long id) throws RecordNotFoundException {
         voucherRepository.delete(voucherRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Voucher to delete not found.")));
     }
 }
-
-//    public void delete(Long id) {
-//        return voucherRepository.findById(id).map(Voucher-> {
-//            voucherRepository.delete(Voucher);}}
