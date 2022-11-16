@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "USERS")
 public class User extends BaseAuditClass{
     
     @Id
@@ -27,6 +28,6 @@ public class User extends BaseAuditClass{
     
     @Column
     @Enumerated(value = EnumType.STRING)
-    private Roles role = Roles.USER;
-    
+    private Roles role;
+
 }
