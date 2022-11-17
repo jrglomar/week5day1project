@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Voucher {
+public class Voucher extends BaseAuditClass{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
