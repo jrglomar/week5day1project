@@ -23,11 +23,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.
                 anonymous().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PATCH, "/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST, "/users/**", "/vouchers/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/users/**", "/vouchers/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/users/**", "/vouchers/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/users/**", "/vouchers/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/users/**", "/vouchers/**").hasAnyRole("ADMIN", "USER")
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 
