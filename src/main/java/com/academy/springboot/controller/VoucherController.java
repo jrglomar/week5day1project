@@ -44,7 +44,7 @@ public class VoucherController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws RecordNotFoundException {
         voucherService.deleteVoucher(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>("Voucher id " + String.valueOf(id) + " successfully deleted.", HttpStatus.OK);
     }
 
 }

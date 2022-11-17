@@ -22,8 +22,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserRepository userRepository;
-//    @Autowired
-//    private UserTypeRepository userTypeRepository;
 
     @Override
     public Page<User> findAllUsers(Pageable pageable) {
