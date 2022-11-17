@@ -1,5 +1,5 @@
 package com.academy.springboot.enums;
 
 public enum Roles {
-    ADMIN, USER
+    ADMIN, USER, ASD, QWE
 }
