@@ -1,7 +1,10 @@
 package com.academy.springboot.model;
 
+import com.academy.springboot.enums.Roles;
 import com.academy.springboot.enums.Types;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,23 +13,21 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Voucher extends BaseAuditClass{
-
+@Table(name = "USERS")
+public class User extends BaseAuditClass{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column
-    private Integer number;
-    
-    @Column
-    private BigDecimal amount;
-    
-    @Column
-    private String description;
 
     @Column
+    private String userName;
+
+    @Column
+    private String password;
+    
+    @Column
     @Enumerated(value = EnumType.STRING)
-    private Types type = Types.CHECK;
+    private Roles role;
 
 }
