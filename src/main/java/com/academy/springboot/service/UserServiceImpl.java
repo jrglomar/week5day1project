@@ -43,9 +43,9 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         }
         if(user.getRole()== Roles.USER){
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), userAuthority());
-        }
+        }else{
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), adminAuthority());
-    }
+    }}
     private List<SimpleGrantedAuthority> adminAuthority(){
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
