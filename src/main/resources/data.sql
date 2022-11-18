@@ -1,3 +1,3 @@
-INSERT INTO voucher(number, amount, description, type) VALUES (123, 24, 'This is voucher 1', 'CASH');
-INSERT INTO USERS (id, user_name, password,role) VALUES (1, 'admin', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu','ADMIN');
-INSERT INTO USERS (id, user_name, password,role) VALUES (2, 'user', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu','USER');
+INSERT INTO voucher(number, amount, description, type, created_at, updated_at) VALUES (123, 24, 'This is voucher 1', 'CASH', '2022-11-18T05:07:00.190+00:00', '2022-11-18T05:07:00.190+00:00');
+INSERT INTO USERS (id, user_name, password, role, created_at, updated_at) VALUES (1, 'admin', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu','ADMIN', '2022-11-18T05:07:00.190+00:00', '2022-11-18T05:07:00.190+00:00');
+INSERT INTO USERS (id, user_name, password, role, created_at, updated_at) VALUES (2, 'user', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu','USER', '2022-11-18T05:07:00.190+00:00', '2022-11-18T05:07:00.190+00:00');

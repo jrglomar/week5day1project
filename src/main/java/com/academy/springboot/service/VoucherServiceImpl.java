@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class VoucherServiceImpl implements VoucherService{
 
@@ -39,9 +41,10 @@ public class VoucherServiceImpl implements VoucherService{
     public Voucher updateVoucher(Voucher voucher, Long id) throws RecordNotFoundException {
         Voucher voucherFound = voucherRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Voucher to update not found."));
-        modelMapper.getConfiguration().setSkipNullEnabled(false);
+        Date createdAt = voucherFound.getCreatedAt();
         modelMapper.map(voucher, voucherFound);
         voucherFound.setId(id);
+        voucherFound.setCreatedAt(createdAt);
         return voucherRepository.save(voucherFound);
     }
     @Override

@@ -7,50 +7,49 @@
 	},
 	"item": [
 		{
-			"name": "Voucher",
+			"name": "Auth",
 			"item": [
 				{
-					"name": "Find All Vouchers",
+					"name": "User Auth",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/vouchers",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"vouchers"
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "devglan-secret",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "devglan-client",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Find All Vouchers With Pagination and Sorting",
-					"request": {
-						"method": "GET",
+						},
+						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/vouchers?page=0&size=2&sort=id,desc",
+							"raw": "{{base_url}}/oauth/token?grant_type=password&username=user&password=password",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"vouchers"
+								"oauth",
+								"token"
 							],
 							"query": [
 								{
-									"key": "page",
-									"value": "0"
+									"key": "grant_type",
+									"value": "password"
 								},
 								{
-									"key": "size",
-									"value": "2"
+									"key": "username",
+									"value": "user"
 								},
 								{
-									"key": "sort",
-									"value": "id,desc"
+									"key": "password",
+									"value": "password"
 								}
 							]
 						}
@@ -58,114 +57,130 @@
 					"response": []
 				},
 				{
-					"name": "Create Voucher",
+					"name": "Admin Auth",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "devglan-secret",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "devglan-client",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"number\": 123,\r\n    \"amount\": 456.245,\r\n    \"type\": \"CASH\",\r\n    \"description\": \"This is voucher number 1\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{base_url}}/vouchers",
+							"raw": "{{base_url}}/oauth/token?grant_type=password&username=admin&password=password",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"vouchers"
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								},
+								{
+									"key": "username",
+									"value": "admin"
+								},
+								{
+									"key": "password",
+									"value": "password"
+								}
 							]
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Actuator",
+			"item": [
 				{
-					"name": "Get Voucher",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "Health Actuator",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{base_url}}/vouchers/1",
+							"raw": "{{base_url}}/actuator/health",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"vouchers",
-								"1"
+								"actuator",
+								"health"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update Voucher",
+					"name": "Info Actuator",
 					"request": {
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"number\": 123,\r\n    \"amount\": 456.245,\r\n    \"type\": \"CASH\",\r\n    \"description\": \"This is updated version of voucher number 1\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{base_url}}/vouchers/1",
+							"raw": "{{base_url}}/actuator/info",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"vouchers",
-								"1"
+								"actuator",
+								"info"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete Voucher",
+					"name": "Metrics Actuator",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"amount\": 100.25,\r\n    \"type\": \"Cash\",\r\n    \"description\": \"This is updated version of voucher number 1\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{base_url}}/vouchers/2",
+							"raw": "{{base_url}}/actuator/metrics",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"vouchers",
-								"2"
+								"actuator",
+								"metrics"
 							]
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -277,6 +292,36 @@
 					"response": []
 				},
 				{
+					"name": "Get User (Record Not Found)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/123",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update User",
 					"request": {
 						"method": "PUT",
@@ -304,6 +349,33 @@
 					"response": []
 				},
 				{
+					"name": "Update User (Record Not Found)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"admin2updated\",\r\n    \"password\": \"$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/123",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete User",
 					"request": {
 						"method": "DELETE",
@@ -318,240 +390,318 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/users/2",
+							"raw": "{{base_url}}/users/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User  (Record Not Found)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 100.25,\r\n    \"type\": \"Cash\",\r\n    \"description\": \"This is updated version of voucher number 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/1000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"1000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Voucher",
+			"item": [
+				{
+					"name": "Find All Vouchers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vouchers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Vouchers With Pagination and Sorting",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vouchers?page=0&size=2&sort=id,desc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "id,desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Voucher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": 123,\r\n    \"amount\": 456.245,\r\n    \"type\": \"CASH\",\r\n    \"description\": \"This is voucher number 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vouchers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Voucher",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vouchers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Voucher (Record not found)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vouchers/123",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Voucher",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": 123,\r\n    \"amount\": 456.245,\r\n    \"type\": \"CASH\",\r\n    \"description\": \"This is updated version of voucher number 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vouchers/15",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Voucher (With null properties)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": 10,\r\n    \"amount\": 456.245,\r\n    \"type\": \"CASH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vouchers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Voucher (Record not found)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": 123,\r\n    \"amount\": 456.245,\r\n    \"type\": \"CASH\",\r\n    \"description\": \"This is updated version of voucher number 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vouchers/123",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Voucher",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 100.25,\r\n    \"type\": \"Cash\",\r\n    \"description\": \"This is updated version of voucher number 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vouchers/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vouchers",
 								"2"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "User Auth",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "devglan-secret",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "devglan-client",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/oauth/token?grant_type=password&username=user&password=password",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"oauth",
-								"token"
-							],
-							"query": [
-								{
-									"key": "grant_type",
-									"value": "password"
-								},
-								{
-									"key": "username",
-									"value": "user"
-								},
-								{
-									"key": "password",
-									"value": "password"
-								}
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "Admin Auth",
+					"name": "Delete Voucher (Record not found)",
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "devglan-secret",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "devglan-client",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 100.25,\r\n    \"type\": \"Cash\",\r\n    \"description\": \"This is updated version of voucher number 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/oauth/token?grant_type=password&username=admin&password=password",
+							"raw": "{{base_url}}/vouchers/123",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"oauth",
-								"token"
-							],
-							"query": [
-								{
-									"key": "grant_type",
-									"value": "password"
-								},
-								{
-									"key": "username",
-									"value": "admin"
-								},
-								{
-									"key": "password",
-									"value": "password"
-								}
+								"vouchers",
+								"123"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Actuator",
-			"item": [
-				{
-					"name": "Health Actuator",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "devglan-secret",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "devglan-client",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/actuator/health",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"actuator",
-								"health"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Metrics Actuator",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "devglan-secret",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "devglan-client",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/actuator/metrics",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"actuator",
-								"metrics"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Info Actuator",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "devglan-secret",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "devglan-client",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/actuator/info",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"actuator",
-								"info"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
 				}
 			]
 		}
@@ -594,7 +744,7 @@
 		},
 		{
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njg3MDczMjksInVzZXJfbmFtZSI6InVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoidzU3SmtYRUh1aXpHRVZYTEZneEdtSkVoSGVVIiwiY2xpZW50X2lkIjoiZGV2Z2xhbi1jbGllbnQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.OWBeeR2rMAV5hjzq0tRsV9NXK44gXH48vtPQWABMlfU",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njg3NTIyODMsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJXdTR1TVFTemZiWjJ3eExDM0JNVXN5S1hDakEiLCJjbGllbnRfaWQiOiJkZXZnbGFuLWNsaWVudCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsInRydXN0Il19.H9-HcFjtVBr6wNdbAQv0mNLdOEfxbnvwA4o0Kpviuo0",
 			"type": "string"
 		}
 	]
