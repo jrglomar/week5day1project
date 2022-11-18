@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,9 +46,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User updateUser(User user, Long id) throws RecordNotFoundException {
         User userFound = userRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("User to update not found."));
-        modelMapper.getConfiguration().setSkipNullEnabled(false);
+        Date createdAt = userFound.getCreatedAt();
         modelMapper.map(user, userFound);
         userFound.setId(id);
+        userFound.setCreatedAt(createdAt);
         return userRepository.save(userFound);
     }
     @Override
