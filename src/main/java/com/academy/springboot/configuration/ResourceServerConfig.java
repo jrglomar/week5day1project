@@ -29,6 +29,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/users/**", "/vouchers/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/users/**", "/vouchers/**").hasAnyRole("ADMIN", "USER")
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+
+        http.headers().frameOptions().disable();
     }
 
 }

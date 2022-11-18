@@ -14,27 +14,29 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class BaseAuditClass {
-    @CreatedBy
-    @Column(name="created_by")
-    private String createdBy;
 
     @CreatedDate
-    @Column(name= "created_at")
+    @Column(name="created_at")
     private Date createdAt;
 
-    @LastModifiedBy
-    @Column(name="last_modified_by")
-    private String lastModifiedBy;
-
     @LastModifiedDate
-    @Column(name="update_at")
+    @Column(name="updated_at")
     private Date updatedAt;
+
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
